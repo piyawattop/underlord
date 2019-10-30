@@ -7,130 +7,143 @@
 
 <link href="~/css/fontRank.css" rel="stylesheet" />
 
-<div class="allTablesContainer">
-    <div class="wrapper col-12">
-        <div class="tableContainer">
-            <div class="table wrapper col-12">
-                <summary class="visuallyHidden">This table charts the Premier League teams</summary>
-                <table>
-                    <thead>
-                        <tr>
-                            <th class="text-centre" scope="col">
-                                <div class="thFull">Position</div>
-                                <div class="thShort">Pos</div>
-                            </th>
-                            <th class="team" scope="col">Player</th>
-                            <th scope="col">
-                                <div class="thFull">Match Played</div>
-                                <div class="thShort">Pl</div>
-                            </th>
-                            <th scope="col" class="points">
-                                <div class="thFull">Points</div>
-                                <div class="thShort">Pts</div>
-                            </th>
-                            <th class="teamForm hideMed" scope="col">Form</th>
-                        </tr>
-                    </thead>
+<style>
+    .table td {
+        border-bottom: unset !important;
+    }
+    .h-custom{
+        font-size:30px;
+    }
+</style>
 
-                    <tbody class="tableBodyContainer isPL">
-                        @foreach (var item in Model.ListPlayer)
+<div class="table-responsive-sm">
+    <summary class="visuallyHidden">This table charts the Premier League teams</summary>
+    <table class="table table-striped table-dark">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">
+                    <div class="h-custom">Profile</div>
+                </th>
+                <th class="text-centre" scope="col">
+                    <div class="thFull h-custom">Position</div>
+                    <div class="thShort h-custom">Pos</div>
+                </th>
+                <th class="team" scope="col">
+                    <div class="h-custom">Player</div>
+                </th>
+                <th class="h-custom" scope="col">
+                    <div class="thFull h-custom">Match Played</div>
+                    <div class="thShort h-custom">Pl</div>
+                </th>
+                <th class="points" scope="col">
+                    <div class="thFull h-custom">Points</div>
+                    <div class="thShort h-custom">Pts</div>
+                </th>
+                <th class="teamForm hideMed h-custom" scope="col">
+                    <div class="h-custom">Form</div>
+                </th>
+            </tr>
+        </thead>
+
+        <tbody class="tableBodyContainer isPL h2">
+            @foreach (var item in Model.ListPlayer)
+            {
+                <tr>
+                    <td>
+                        <img src="~/images/ProfileUnderload.png" class="rounded-circle" alt="Cinque Terre" style="width:120px;height:120px"/>
+                    </td>
+                    <td class="pos button-tooltip pt-5" tabindex="0" id="Tooltip">
+                        @if (item.position == 1)
                         {
-                            <tr class="tableDark">
-                                <td class="pos button-tooltip" tabindex="0" id="Tooltip">
-                                    @if (item.position == 1)
-                                    {
-                                        <span class="fireFont">@item.position</span>
-                                    }
-                                    else if (item.position == 2)
-                                    {
-                                        <span class="pupleFont">@item.position</span>
-                                    }
-                                    else if (item.position == 3)
-                                    {
-                                        <span class="waterFont">@item.position</span>
-                                    }
-                                    else
-                                    {
-                                        <span>@item.position</span>
-                                    }
-                                </td>
-                                <td class="team" scope="row">
-                                    @if (item.position == 1)
-                                    {
-                                        <span class="fireFont">@item.name</span>
-
-                                    }
-                                    else if (item.position == 2)
-                                    {
-                                        <span class="pupleFont">@item.name</span>
-                                    }
-                                    else if (item.position == 3)
-                                    {
-                                        <span class="waterFont">@item.name</span>
-                                    }
-                                    else
-                                    {
-                                        <span>@item.name</span>
-                                    }
-                                </td>
-                                <td>
-                                    @if (item.position == 1)
-                                    {
-                                        <span class="fireFont">@item.form.Count</span>
-                                    }
-                                    else if (item.position == 2)
-                                    {
-                                        <span class="pupleFont">@item.form.Count</span>
-                                    }
-                                    else if (item.position == 3)
-                                    {
-                                        <span class="waterFont">@item.form.Count</span>
-                                    }
-                                    else
-                                    {
-                                        <span>@item.form.Count</span>
-                                    }
-                                </td>
-                                <td class="points">
-                                    @if (item.position == 1)
-                                    {
-                                        <span class="fireFont">@item.point</span>
-                                    }
-                                    else if (item.position == 2)
-                                    {
-                                        <span class="pupleFont">@item.point</span>
-                                    }
-                                    else if (item.position == 3)
-                                    {
-                                        <span class="waterFont">@item.point</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="">@item.point</span>
-                                    }
-                                </td>
-                                <td class="form hideMed">
-                                    @for (int i = 0; i < item.form.Count; i++)
-                                    {
-                                        if (item.form[i].point < 0)
-                                        {
-                                            <li tabindex="@i" class="lose button-tooltip" id="Tooltip">
-                                                <abbr title="Won" class="form-abbreviation">@item.form[i].point</abbr>
-                                            </li>
-                                        }
-                                        else
-                                        {
-                                            <li tabindex="@i" class="win button-tooltip" id="Tooltip">
-                                                <abbr title="Won" class="form-abbreviation">@item.form[i].point</abbr>
-                                            </li>
-                                        }
-                                    }
-                                </td>
-                            </tr>
+                            <span class="fireFont">@item.position</span>
                         }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+                        else if (item.position == 2)
+                        {
+                            <span class="pupleFont">@item.position</span>
+                        }
+                        else if (item.position == 3)
+                        {
+                            <span class="waterFont">@item.position</span>
+                        }
+                        else
+                        {
+                            <span>@item.position</span>
+                        }
+                    </td>
+                    <td class="team pt-5" scope="row">
+                        @if (item.position == 1)
+                        {
+                            <span class="fireFont">@item.name</span>
+
+                        }
+                        else if (item.position == 2)
+                        {
+                            <span class="pupleFont">@item.name</span>
+                        }
+                        else if (item.position == 3)
+                        {
+                            <span class="waterFont">@item.name</span>
+                        }
+                        else
+                        {
+                            <span>@item.name</span>
+                        }
+                    </td>
+                    <td class="pt-5">
+                        @if (item.position == 1)
+                        {
+                            <span class="fireFont">@item.form.Count</span>
+                        }
+                        else if (item.position == 2)
+                        {
+                            <span class="pupleFont">@item.form.Count</span>
+                        }
+                        else if (item.position == 3)
+                        {
+                            <span class="waterFont">@item.form.Count</span>
+                        }
+                        else
+                        {
+                            <span>@item.form.Count</span>
+                        }
+                    </td>
+                    <td class="points pt-5">
+                        @if (item.position == 1)
+                        {
+                            <span class="fireFont">@item.point</span>
+                        }
+                        else if (item.position == 2)
+                        {
+                            <span class="pupleFont">@item.point</span>
+                        }
+                        else if (item.position == 3)
+                        {
+                            <span class="waterFont">@item.point</span>
+                        }
+                        else
+                        {
+                            <span class="">@item.point</span>
+                        }
+                    </td>
+                    <td class="form hideMed pt-5">
+                        @for (int i = 0; i < item.form.Count; i++)
+                        {
+                            if (item.form[i].point < 0)
+                            {
+                                <li tabindex="@i" class="lose button-tooltip" id="Tooltip">
+                                    <abbr title="Won" class="form-abbreviation">@item.form[i].point</abbr>
+                                </li>
+                            }
+                            else
+                            {
+                                <li tabindex="@i" class="win button-tooltip" id="Tooltip">
+                                    <abbr title="Won" class="form-abbreviation">@item.form[i].point</abbr>
+                                </li>
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

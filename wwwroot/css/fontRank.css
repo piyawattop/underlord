@@ -23,7 +23,7 @@
 
 
 .waterFont {
-    font-size:35px;
+    font-size: 35px;
     display: block;
     background: url('/images/water.jpg');
     background-size: cover;
@@ -65,4 +65,9 @@
     0% {
         background-position: 100% -10%;
     }
+}
+
+.table td {
+    border-bottom: unset !important;
+    height: 5.7rem
 }
