@@ -1,0 +1,68 @@
+﻿
+.fireFont {
+    font-size: 40px;
+    display: block;
+    background: url('/images/fire.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: fire .5s linear infinite;
+}
+
+@keyframes fire {
+    0% {
+        background-position: 0% 10%;
+    }
+
+    0% {
+        background-position: 100% -10%;
+    }
+}
+
+
+.waterFont {
+    font-size:35px;
+    display: block;
+    background: url('/images/water.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: water .5s linear infinite;
+}
+
+@keyframes water {
+    0% {
+        background-position: 0% 10%;
+    }
+
+    0% {
+        background-position: 100% -10%;
+    }
+}
+
+
+.pupleFont {
+    font-size: 35px;
+    display: block;
+    background: url('/images/firePuple.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: Firepuple .5s linear infinite;
+}
+
+@keyframes Firepuple {
+    0% {
+        background-position: 0% 10%;
+    }
+
+    0% {
+        background-position: 100% -10%;
+    }
+}

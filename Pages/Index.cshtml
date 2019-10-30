@@ -1,8 +1,12 @@
 ﻿@page
 @model IndexModel
 @{
-ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Home page";
 }
+
+
+<link href="~/css/fontRank.css" rel="stylesheet" />
+
 <div class="allTablesContainer">
     <div class="wrapper col-12">
         <div class="tableContainer">
@@ -29,33 +33,93 @@ ViewData["Title"] = "Home page";
                     </thead>
 
                     <tbody class="tableBodyContainer isPL">
-                        @foreach (var item in Model.ListPlayer) {
+                        @foreach (var item in Model.ListPlayer)
+                        {
                             <tr class="tableDark">
                                 <td class="pos button-tooltip" tabindex="0" id="Tooltip">
-                                    <span class="value">@item.position</span>
-                                    <!-- <span class="movement  none">
-                                        <span class="tooltipContainer tooltip-left" role="tooltip">
-                                            <span class="tooltip-content">Previous Position
-                                                <span class="resultHighlight">
-                                                    1
-                                                </span>
-                                            </span>
-                                        </span>
-                                    </span> -->
+                                    @if (item.position == 1)
+                                    {
+                                        <span class="fireFont">@item.position</span>
+                                    }
+                                    else if (item.position == 2)
+                                    {
+                                        <span class="pupleFont">@item.position</span>
+                                    }
+                                    else if (item.position == 3)
+                                    {
+                                        <span class="waterFont">@item.position</span>
+                                    }
+                                    else
+                                    {
+                                        <span>@item.position</span>
+                                    }
                                 </td>
                                 <td class="team" scope="row">
-                                    @item.name
+                                    @if (item.position == 1)
+                                    {
+                                        <span class="fireFont">@item.name</span>
+
+                                    }
+                                    else if (item.position == 2)
+                                    {
+                                        <span class="pupleFont">@item.name</span>
+                                    }
+                                    else if (item.position == 3)
+                                    {
+                                        <span class="waterFont">@item.name</span>
+                                    }
+                                    else
+                                    {
+                                        <span>@item.name</span>
+                                    }
                                 </td>
-                                <td>@item.form.Count</td>
-                                <td class="points">@item.point</td>
+                                <td>
+                                    @if (item.position == 1)
+                                    {
+                                        <span class="fireFont">@item.form.Count</span>
+                                    }
+                                    else if (item.position == 2)
+                                    {
+                                        <span class="pupleFont">@item.form.Count</span>
+                                    }
+                                    else if (item.position == 3)
+                                    {
+                                        <span class="waterFont">@item.form.Count</span>
+                                    }
+                                    else
+                                    {
+                                        <span>@item.form.Count</span>
+                                    }
+                                </td>
+                                <td class="points">
+                                    @if (item.position == 1)
+                                    {
+                                        <span class="fireFont">@item.point</span>
+                                    }
+                                    else if (item.position == 2)
+                                    {
+                                        <span class="pupleFont">@item.point</span>
+                                    }
+                                    else if (item.position == 3)
+                                    {
+                                        <span class="waterFont">@item.point</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="">@item.point</span>
+                                    }
+                                </td>
                                 <td class="form hideMed">
                                     @for (int i = 0; i < item.form.Count; i++)
                                     {
-                                        if(item.form[i].point < 0){
+                                        if (item.form[i].point < 0)
+                                        {
                                             <li tabindex="@i" class="lose button-tooltip" id="Tooltip">
                                                 <abbr title="Won" class="form-abbreviation">@item.form[i].point</abbr>
                                             </li>
-                                        }else{
+                                        }
+                                        else
+                                        {
                                             <li tabindex="@i" class="win button-tooltip" id="Tooltip">
                                                 <abbr title="Won" class="form-abbreviation">@item.form[i].point</abbr>
                                             </li>
@@ -66,11 +130,7 @@ ViewData["Title"] = "Home page";
                         }
                     </tbody>
                 </table>
-
-
             </div>
-
         </div>
-
     </div>
 </div>
