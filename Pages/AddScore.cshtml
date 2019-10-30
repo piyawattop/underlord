@@ -1,0 +1,31 @@
+﻿@page
+@model AddScoreModel
+@{
+ViewData["Title"] = "Add Score page";
+}
+
+<div class="wrapper col-12 font-white">
+    <h2>Add Score</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Competition.round" class="control-label"></label>
+                    <input asp-for="Competition.round" class="form-control" style="font-size:2em"/>
+                    <span asp-validation-for="Competition.round" class="text-danger"></span>
+                </div>
+                @for (int i = 0; i < Model.Players.Count; i++)
+                {
+                <div class="form-group">
+                    <label class="control-label">@Model.Players[i].name</label>
+                    <input class="form-control" name="point#@Model.Players[i].name" style="font-size:2em" />
+                </div>
+                }
+                <div class="form-group">
+                    <input type="submit" value="Add" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

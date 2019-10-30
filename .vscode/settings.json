@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/d64ebdc5-e16b-4381-bb26-81703d2eb291/resourceGroups/undelord/providers/Microsoft.Web/sites/underlord",
+    "appService.deploySubpath": "bin\\Debug\\netcoreapp3.0\\publish"
+}

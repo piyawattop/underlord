@@ -1,0 +1,65 @@
+{
+  "player": [{
+    "name": "Mel2CileSS",
+    "position": 0,
+    "point": 0.0,
+    "form": null
+  }, {
+    "name": "Kawtommud Saikluay",
+    "position": 0,
+    "point": 0.0,
+    "form": null
+  }, {
+    "name": "Mercius",
+    "position": 0,
+    "point": 0.0,
+    "form": null
+  }, {
+    "name": "Mr.Oat",
+    "position": 0,
+    "point": 0.0,
+    "form": null
+  }, {
+    "name": "Sawakhato Bot",
+    "position": 0,
+    "point": 0.0,
+    "form": null
+  }],
+  "competition": [{
+    "round": 1,
+    "result": [{
+      "name": "Mel2CileSS",
+      "point": 2.0
+    }, {
+      "name": "Kawtommud Saikluay",
+      "point": 0.5
+    }, {
+      "name": "Mercius",
+      "point": 1.0
+    }, {
+      "name": "Mr.Oat",
+      "point": 3.0
+    }, {
+      "name": "Sawakhato Bot",
+      "point": -0.5
+    }]
+  }, {
+    "round": 2,
+    "result": [{
+      "name": "Mel2CileSS",
+      "point": 3.0
+    }, {
+      "name": "Kawtommud Saikluay",
+      "point": -2.0
+    }, {
+      "name": "Mercius",
+      "point": -0.5
+    }, {
+      "name": "Mr.Oat",
+      "point": 1.0
+    }, {
+      "name": "Sawakhato Bot",
+      "point": 0.625
+    }]
+  }]
+}

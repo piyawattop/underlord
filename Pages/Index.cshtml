@@ -1,0 +1,76 @@
+﻿@page
+@model IndexModel
+@{
+ViewData["Title"] = "Home page";
+}
+<div class="allTablesContainer">
+    <div class="wrapper col-12">
+        <div class="tableContainer">
+            <div class="table wrapper col-12">
+                <summary class="visuallyHidden">This table charts the Premier League teams</summary>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="text-centre" scope="col">
+                                <div class="thFull">Position</div>
+                                <div class="thShort">Pos</div>
+                            </th>
+                            <th class="team" scope="col">Player</th>
+                            <th scope="col">
+                                <div class="thFull">Match Played</div>
+                                <div class="thShort">Pl</div>
+                            </th>
+                            <th scope="col" class="points">
+                                <div class="thFull">Points</div>
+                                <div class="thShort">Pts</div>
+                            </th>
+                            <th class="teamForm hideMed" scope="col">Form</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="tableBodyContainer isPL">
+                        @foreach (var item in Model.ListPlayer) {
+                            <tr class="tableDark">
+                                <td class="pos button-tooltip" tabindex="0" id="Tooltip">
+                                    <span class="value">@item.position</span>
+                                    <!-- <span class="movement  none">
+                                        <span class="tooltipContainer tooltip-left" role="tooltip">
+                                            <span class="tooltip-content">Previous Position
+                                                <span class="resultHighlight">
+                                                    1
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </span> -->
+                                </td>
+                                <td class="team" scope="row">
+                                    @item.name
+                                </td>
+                                <td>@item.form.Count</td>
+                                <td class="points">@item.point</td>
+                                <td class="form hideMed">
+                                    @for (int i = 0; i < item.form.Count; i++)
+                                    {
+                                        if(item.form[i].point < 0){
+                                            <li tabindex="@i" class="lose button-tooltip" id="Tooltip">
+                                                <abbr title="Won" class="form-abbreviation">@item.form[i].point</abbr>
+                                            </li>
+                                        }else{
+                                            <li tabindex="@i" class="win button-tooltip" id="Tooltip">
+                                                <abbr title="Won" class="form-abbreviation">@item.form[i].point</abbr>
+                                            </li>
+                                        }
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
