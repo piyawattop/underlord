@@ -9,34 +9,46 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 
 namespace UnderlordLeagueTables.Pages
 {
     public class AddScoreModel : PageModel
     {
+        private const string BlobConatiner = "insights-log-data";
         [BindProperty]
         public Competition Competition { get; set; }
         [BindProperty]
         public List<Player> Players { get; set; }
 
         private readonly ILogger<AddScoreModel> _logger;
+        private readonly IConfiguration _configuration;
 
-        public AddScoreModel(ILogger<AddScoreModel> logger)
+        public AddScoreModel(ILogger<AddScoreModel> logger, IConfiguration configuration)
         {
             _logger = logger;
+            _configuration = configuration;
         }
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-            string json = System.IO.File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "data.json"));
+            BlobStorageService blobService = new BlobStorageService(_configuration.GetValue<string>("BlobStorageConnectionString"));
+            await blobService.InitializeAsync(BlobConatiner);
+            var fileName = Path.Combine(Directory.GetCurrentDirectory(), "data" + DateTime.Now.ToString("HHmmsss") + ".json");
+            await blobService.DownloadAsync("data.json", fileName);
+            string json = System.IO.File.ReadAllText(fileName);
+            if (!string.IsNullOrEmpty(json))
+            {
 
-            UnderlordTable collection = JsonConvert.DeserializeObject<UnderlordTable>(json);
-            Players = collection.player;
-            Competition = new Competition();
-            Competition.round = collection.competition.Max(e => e.round) + 1;
-            Competition.result = new List<Result>();
+                UnderlordTable collection = JsonConvert.DeserializeObject<UnderlordTable>(json);
+                Players = collection.player;
+                Competition = new Competition();
+                Competition.round = collection.competition.Max(e => e.round) + 1;
+                Competition.result = new List<Result>();
+            }
+            System.IO.File.Delete(fileName);
         }
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
@@ -63,17 +75,22 @@ namespace UnderlordLeagueTables.Pages
             }
             if (isAddNew)
             {
-                string json = System.IO.File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "data.json"));
+                BlobStorageService blobService = new BlobStorageService(_configuration.GetValue<string>("BlobStorageConnectionString"));
+                await blobService.InitializeAsync(BlobConatiner);
+                var fileName = Path.Combine(Directory.GetCurrentDirectory(), "data" + DateTime.Now.ToString("HHmmsss") + ".json");
+                await blobService.DownloadAsync("data.json", fileName);
+                string json = System.IO.File.ReadAllText(fileName);
                 UnderlordTable collection = JsonConvert.DeserializeObject<UnderlordTable>(json);
                 collection.competition.Add(Competition);
                 string output = JsonConvert.SerializeObject(collection);
-                System.IO.File.WriteAllText(Path.Combine(Directory.GetCurrentDirectory(), "data.json"), output);
+                System.IO.File.WriteAllText(fileName, output);
+                await blobService.UploadFileAsync(fileName, "data.json");
+                System.IO.File.Delete(fileName);
                 return RedirectToPage("./Index");
             }
             else
             {
                 return Page();
-
             }
         }
     }
